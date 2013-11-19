@@ -24,5 +24,6 @@ BabyDancer.prototype.step = function(timeBetweenSteps){
 };
 
 BabyDancer.prototype.lineUp = function(left){
+  this.whistle();
   this.$node.animate({left: left, top: 10});
 };

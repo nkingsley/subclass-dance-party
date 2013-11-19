@@ -8,6 +8,7 @@
     <script src="src/blinkyDancer.js"></script>
     <script src="src/robotDancer.js"></script>
     <script src="src/babyDancer.js"></script>
+    <script src="src/fredDancer.js"></script>
 
   </head>
   <body>
@@ -16,7 +17,7 @@
       <span class="title">object dance party</span>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">add a blinky dancer</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="RobotDancer">add a robot dancer</a>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="MarcusDancer">add a marcus dancer</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="FredDancer">add a fred dancer</a>
       <a href="#" class="addDancerButton" data-dancer-maker-function-name="BabyDancer">add a baby dancer</a>
       <a href="#" class="lineUpButton">Line Up All The Things</a>
     </div>
@@ -26,8 +27,16 @@
         window.dancers = [];
 
         $(".lineUpButton").on("click", function(){
+          var counts = {
+            BabyDancer:   0,
+            BlinkyDancer: 0,
+            RobotDancer:  0,
+            FredDancer:   0
+          };
           for(var i = 0; i < window.dancers.length; i++){
-            dancers[i].lineUp(i*80);
+            var type = dancers[i].$node.attr('class');
+            counts[type]++;
+            dancers[i].lineUp(counts[type]*80);
           }
         });
 
@@ -55,6 +64,9 @@
             $("body").width() * Math.random(),
             Math.random() * 5000
           );
+          if (dancers[0] && dancers[0].isLinedUp){
+            dancer.lineUp();
+          }
 
           window.dancers.push(dancer);
 

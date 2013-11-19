@@ -24,5 +24,6 @@ RobotDancer.prototype.step = function(timeBetweenSteps){
 };
 
 RobotDancer.prototype.lineUp = function(top){
+  this.whistle();
   this.$node.animate({left: 50, top: top});
 };

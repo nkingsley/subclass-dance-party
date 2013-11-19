@@ -7,6 +7,7 @@ var Dancer = function(top, left, timeBetweenSteps){
   // this one sets the position to some random default point within the body
   this.step(timeBetweenSteps);
   this.setPosition(top, left);
+  this.isLinedUp = false;
 };
 Dancer.prototype.step = function(timeBetweenSteps){
   // the basic dancer doesn't do anything interesting at all on each step,
@@ -24,4 +25,17 @@ Dancer.prototype.setPosition = function(top, left){
     left: left
   };
   this.$node.css(styleSettings);
+};
+Dancer.prototype.whistle = function(){
+  if (this.isLinedUp){
+    this.step = this.oldStep;
+    $('.lineUpButton').html('Line up all the Things');
+    this.isLinedUp = false;
+    this.step(this.timeBetweenSteps);
+  } else {
+    this.oldStep = this.step;
+    $('.lineUpButton').html('dance monkey dance');
+    this.step = function(){};
+    this.isLinedUp = true;
+  }
 };
