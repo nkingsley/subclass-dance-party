@@ -12,12 +12,17 @@ var RobotDancer = function(top, left, timeBetweenSteps){
 };
 
 RobotDancer.prototype = Object.create(Dancer.prototype);
+
 RobotDancer.prototype.constructor = RobotDancer;
+
 RobotDancer.prototype.step = function(timeBetweenSteps){
   Dancer.prototype.step.call(this,timeBetweenSteps);
   var danceMode = Math.ceil(Math.random()*3);
   var danceMode2 = Math.ceil(Math.random()*5);
     this.$node.animate({top : danceMode*200, left: danceMode2*150, rotation: danceMode2 + "deg"});
   this.$node.html('<span class = "robotDancer"> <img src = "robot' + danceMode + '.jpg"/></span>');
-  
+};
+
+RobotDancer.prototype.lineUp = function(top){
+  this.$node.animate({left: 50, top: top});
 };

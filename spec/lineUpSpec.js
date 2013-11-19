@@ -4,8 +4,8 @@ describe("lineUpDancer", function(){
   var dancer2;
 
   beforeEach(function(){
-    dancer1 = new robotDancer(5, 5, 5000);
-    dancer2 = new blinkyDancer(42, 42, 4242);
+    dancer1 = new RobotDancer(5, 5, 5000);
+    dancer2 = new BlinkyDancer(42, 42, 4242);
   });
 
   it("should have a lineUp function", function(){
