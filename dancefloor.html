@@ -5,11 +5,13 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="lib/jquery.js"></script>
     <script src="lib/jquery.transit.min.js"></script>
+    <script src="src/throttle.js"></script>
     <script src="src/dancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
     <script src="src/robotDancer.js"></script>
     <script src="src/babyDancer.js"></script>
     <script src="src/fredDancer.js"></script>
+    
   </head>
   <body>
     <div class="topbar">
@@ -87,18 +89,18 @@
             var frequencyData = new Uint8Array(analyser.frequencyBinCount);
             analyser.getByteFrequencyData(frequencyData);
             var boom = 0;
-            for (var i = 0 ; i < 20 ; i++){
+            for (var i = 0 ; i < 300 ; i++){
               boom += frequencyData[i];
             }
-            boom = boom/20;
-            if (boom > 205){
+            boom = boom/300;
+            if (boom > 140){
               console.log('BOOM');
               for (var i = 0 ; i < dancers.length ; i++){
-                dancers[i].step();
+                Dancer.prototype.step.call(dancers[i]);
               }
             }
-          },100);
-          
+          },30);
+
 
         };
 

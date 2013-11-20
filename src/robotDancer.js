@@ -16,14 +16,18 @@ RobotDancer.prototype = Object.create(Dancer.prototype);
 RobotDancer.prototype.constructor = RobotDancer;
 
 RobotDancer.prototype.step = function(timeBetweenSteps){
-  Dancer.prototype.step.call(this,timeBetweenSteps);
+  var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  var plusOrMinus2 = Math.random() < 0.5 ? -1 : 1;
   var danceMode = Math.ceil(Math.random()*3);
-  var danceMode2 = Math.ceil(Math.random()*5);
-    this.$node.animate({top : danceMode*200, left: danceMode2*150, rotation: danceMode2 + "deg"});
+  var danceMode2 = Math.ceil(Math.random()*4);
+  this.top += Math.ceil(plusOrMinus*(2.4*danceMode + 6));
+  this.left += Math.ceil(plusOrMinus*(2.4*danceMode2 + 6));
+  this.$node.transition({top : this.top, left: this.left},50,"snap");
+  this.$node.transition({rotate: danceMode2*5 + "deg"},50,"snap");
   this.$node.html('<span class = "robotDancer"> <img src = "robot' + danceMode + '.png"/></span>');
 };
 
 RobotDancer.prototype.lineUp = function(top){
-  this.whistle();
+  this.whistle(); 
   this.$node.animate({left: 50, top: top});
 };

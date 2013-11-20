@@ -11,12 +11,16 @@ FredDancer.prototype = Object.create(Dancer.prototype);
 FredDancer.prototype.constructor = FredDancer;
 
 FredDancer.prototype.step = function(timeBetweenSteps){
-  Dancer.prototype.step.call(this,timeBetweenSteps);
+ // Dancer.prototype.step.call(this,timeBetweenSteps);
+  var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+  var plusOrMinus2 = Math.random() < 0.5 ? -1 : 1;
   var danceMode = Math.ceil(Math.random()*3);
-  var danceMode2 = Math.ceil(Math.random()*10);
+  var danceMode2 = Math.ceil(Math.random()*3);
+  this.top += Math.ceil(plusOrMinus*(3*danceMode + 5));
+  this.left += Math.ceil(plusOrMinus*(3*danceMode2 + 5));
   this.$node.html('<span class = "FredDancer"> <img src = "fred' + danceMode + '.png" height = "200"/></span>');
-  this.$node.animate({top : this.top + danceMode2*50, left: this.left + danceMode2*100});
-  this.$node.transition({rotate: danceMode2*30 + "deg"});
+  this.$node.transition({top : this.top, left: this.left},50,"ease");
+  this.$node.transition({rotate: danceMode2*5 + "deg"},50,"ease");
 };
 
 FredDancer.prototype.lineUp = function(left){
